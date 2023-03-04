@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bubble/screens/welcomeScreen.dart';
-import 'package:bubble/screens/chatStart.dart';
 import 'package:bubble/screens/qrScanner.dart';
 import 'package:bubble/screens/qrGenerator.dart';
 import 'package:bubble/screens/chatScreen.dart';
+import 'package:bubble/screens/askNickname.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: WelcomeScreen.id,
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
-        ChatStart.id: (context) => ChatStart(),
+        AskNickname.id: (context) => const AskNickname(),
         QRScanner.id: (context) => QRScanner(),
         QRGenerator.id: (context) => QRGenerator(),
         ChatScreen.id: (context) => ChatScreen(),

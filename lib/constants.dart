@@ -46,3 +46,7 @@ Stream<Map> kDummyStreamData = {
     }
   ]
 } as Stream<Map>;
+
+String kNickname = "";
+
+String kWifiIPv4 = "No IP address received";
