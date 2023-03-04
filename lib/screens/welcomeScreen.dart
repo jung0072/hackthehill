@@ -13,14 +13,46 @@ class WelcomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          children: [Text("landing page info comes here")],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Hero(
+                tag: 'welcome page',
+                child: Container(
+                  child: Image.asset('images/welcome.png'),
+                  height: 300.0,
+                )),
+            const Text(
+              "No need to Log In!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Simplest way to chat on mobile phones",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, ChatStart.id);
         },
-        child: Icon(Icons.message),
+        label: const Text("Start Chat"),
+        icon: const Icon(Icons.message),
+        backgroundColor: const Color(0xFFF08B1C),
       ),
     );
   }
