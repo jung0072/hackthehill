@@ -34,19 +34,29 @@ const kTextFieldDecoration = InputDecoration(
   ),
 );
 
-Stream<Map> kDummyStreamData = {
-  "documents": [
-    {
-      "data": [
-        {"text": "Hello", "sender": "use1@gmail.com"},
-        {"text": "Hi", "sender": "use2@gmail.com"},
-        {"text": "Where are you at?", "sender": "use1@gmail.com"},
-        {"text": "I'm at CRX204. How about you?", "sender": "use2@gmail.com"},
-      ]
-    }
-  ]
-} as Stream<Map>;
-
 String kNickname = "";
 
 String kWifiIPv4 = "No IP address received";
+
+List<Map> kTextMessages = [
+  {
+    "sender": "Mickey",
+    "isMe": true,
+    "text": "Hello",
+  },
+  {
+    "sender": "Alison",
+    "isMe": false,
+    "text": "Hi",
+  },
+  {
+    "sender": "Mickey",
+    "isMe": true,
+    "text": "How are you?",
+  },
+  {
+    "sender": "Alison",
+    "isMe": false,
+    "text": "Not bad. How about you?",
+  },
+];

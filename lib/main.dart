@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
         AskNickname.id: (context) => const AskNickname(),
-        QRScanner.id: (context) => QRScanner(),
-        QRGenerator.id: (context) => QRGenerator(),
-        ChatScreen.id: (context) => ChatScreen(),
+        QRScanner.id: (context) => const QRScanner(),
+        QRGenerator.id: (context) => const QRGenerator(),
+        ChatScreen.id: (context) => const ChatScreen(),
       },
     );
   }

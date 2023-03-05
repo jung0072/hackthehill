@@ -31,7 +31,7 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scan QR code"),
+        title: const Text("Scan QR code"),
       ),
       body: Column(
         children: <Widget>[

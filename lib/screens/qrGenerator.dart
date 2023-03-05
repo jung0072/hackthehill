@@ -27,7 +27,7 @@ class _QRGeneratorState extends State<QRGenerator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your QR code"),
+        title: const Text("Your QR code"),
       ),
       body: Center(
         child: Column(

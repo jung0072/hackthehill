@@ -13,14 +13,11 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
-
   String messageText = "";
 
   @override
   void initState() {
     super.initState();
-
-    // getCurrentUser();
   }
 
   @override
@@ -30,13 +27,12 @@ class _ChatScreenState extends State<ChatScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () {
-                // _auth.signOut();
                 Navigator.pop(context);
               }),
         ],
-        title: Text('Bubble Chat'),
+        title: const Text('Bubble Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
@@ -62,8 +58,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   TextButton(
                     onPressed: () {
                       messageTextController.clear();
+                      setState(() {
+                        kTextMessages.add({
+                          "sender": kNickname,
+                          "isMe": true,
+                          "text": messageText,
+                        });
+                      });
                     },
-                    child: Text(
+                    child: const Text(
                       'Send',
                       style: kSendButtonTextStyle,
                     ),
@@ -79,57 +82,20 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessagesStream extends StatelessWidget {
-  final Stream<Map> testStream = (() {
-    late final StreamController<Map> controller;
-
-    controller = StreamController<Map>(
-      onListen: () async {
-        await controller.addStream(kDummyStreamData);
-        await controller.close();
-      },
-    );
-
-    return controller.stream;
-  })();
-
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Map>(
-      stream: testStream,
-      builder: (context, snapshot) {
-        print("builder run");
-        if (!snapshot.hasData) {
-          print("no data from Stream");
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.lightBlueAccent,
-            ),
+    return Expanded(
+      child: ListView(
+        reverse: false,
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        children: kTextMessages.map((element) {
+          return MessageBubble(
+            sender: element["sender"],
+            isMe: element["isMe"],
+            text: element["text"],
           );
-        }
-        final messages = snapshot.data?["documents"].reversed;
-        List<MessageBubble> messageBubbles = [];
-        for (var message in messages) {
-          final messageText = message["data"]['text'];
-          final messageSender = message["data"]['sender'];
-
-          final currentUser = "test@gmail.com";
-
-          final messageBubble = MessageBubble(
-            sender: messageSender,
-            text: messageText,
-            isMe: currentUser == messageSender,
-          );
-
-          messageBubbles.add(messageBubble);
-        }
-        return Expanded(
-          child: ListView(
-            reverse: true,
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-            children: messageBubbles,
-          ),
-        );
-      },
+        }).toList(),
+      ),
     );
   }
 }
@@ -144,25 +110,25 @@ class MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             sender,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: Colors.black54,
             ),
           ),
           Material(
             borderRadius: isMe
-                ? BorderRadius.only(
+                ? const BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0))
-                : BorderRadius.only(
+                : const BorderRadius.only(
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -170,7 +136,8 @@ class MessageBubble extends StatelessWidget {
             elevation: 5.0,
             color: isMe ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text(
                 text,
                 style: TextStyle(
